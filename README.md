@@ -1,1 +1,4 @@
-# config_files
+# Config. Files
+So far keeping only two files
+## vimrc
+## bashrc
