@@ -1,17 +1,15 @@
 set nu
-set hidden
-" set nocompatible
+set nocompatible
 set history=1000000
 set autoindent
 set smartindent
-set hlsearch
 set incsearch
 set cindent
 set cursorline
 execute pathogen#infect()
 syntax enable
 "let g:solarized_termcolors=256
-set background=dark
+set background=light
 "colorscheme solarized
 
 " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
@@ -48,11 +46,3 @@ map <C-q> <C-w>q
 nnoremap , :
 inoremap aa <Esc>
 inoremap jj <Esc>
-
-" to get persistent undo facility
-set undofile 
-set undodir=$HOME/.vim/undodidr
-"set tabstop=8
-"set expandtab
-"set shiftwidth=4
-"set softtabstop=4
