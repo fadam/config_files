@@ -1,0 +1,6 @@
+alias .. 'cd ..'
+alias ... 'cd ../..'
+alias ll 'ls -l'
+# Binding keys to get matlab-like history search
+bindkey -k up history-search-backward
+bindkey -k down history-search-forward

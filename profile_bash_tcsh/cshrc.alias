@@ -1,0 +1,90 @@
+#echo "File: .cshrc.alias"
+
+if ( "$system" != "itppnd2" && "$system" != "itppnd1" &&  "$system" != "itppnd3" && "$system" != "itppnd4") then
+   alias   ls      	'ls --color=tty'
+   alias   ll      	'ls -l --color=tty'
+   alias   la      	'ls -a --color=tty'
+endif
+
+alias print	        'mp -l -s "\!*" <\!* | lp -dirving'
+alias	xv		'/home/dfdtools/exec/xv_3.10a -visual 0x28'
+#if ( -x /users/genesis/develop/bin/gxv ) alias xv 'gxv'
+
+alias bigfiles          'find . -ls -type f | sort -n +6 | tail -20'
+
+################################################################
+if ( ! $?EDITOR ) then
+  setenv EDITOR "vi"
+endif
+
+
+################################################################
+# Plain old unix + default flags
+alias   m       	'more'
+alias   a       	'alias | m'
+alias   d       	'/bin/ls -al \!* | m'
+alias   h       	'history'
+alias   t       	'date +"  DATE: %d.%m.%Y    (%A)%n  TIME: %H:%M:%S"'
+alias   w       	'w \!* | sort | m'
+alias   bc      	'bc -l'
+alias   gv      	'ghostview -bg white -fg black -a4 \!*&'
+alias   ac      	'/home/dfdtools/public_domain/conv/acrobat/8.1.1/bin/acroread \!* &'
+alias   ll     	        'ls -al \!* | m'
+alias   who     	'who -TH \!* | sort'
+alias   c  	   	'ls -1 | wc -l'
+alias   count  	   	'ls -1 \!* | wc -l'
+
+### Prompts
+#alias   smallprompt     'set prompt="$user\@$system\: "'
+#alias   smallprompt2    'set prompt="%B%m%b %C2%# "'
+#alias   smallprompt3    'set prompt="%C2%# "'
+alias   bigprompt       'set prompt="%m:%~%# "'
+
+################################################################
+# Utilities
+alias   path     	'set | grep path'
+alias   manpath     	'echo $MANPATH'
+
+################################################################################
+################################################################
+#  Rlogin aliases
+alias	itp		'ssh -X itppnd1'
+alias	itp2		'ssh -X itppnd2'
+alias	itp3		'ssh -X itppnd3'
+alias	itp4		'ssh -X itppnd4'
+alias tvsp1 'ssh -X tvsp1'
+alias tvsp2 'ssh -X tvsp2'
+alias capone 'ssh -X capone'
+alias t7500 'ssh  eoc-sv-t7500'
+alias psipn1 'ssh  psipn1'
+#alias tvsp1 'remsh tvsp1 -l fath_ah'
+
+################################################################
+# Typo helpers
+alias   s      		'ls'	# ik type vaak per ongeluk ;s ipv ls
+alias   pw      	'pwd'
+alias   pd      	'pwd'
+#alias   geso1    	'geos1'
+#alias   detex    	'untex'
+alias   mdkir    	'mkdir'
+#alias   exir    	'exit'
+alias   cd..    	'cd ..'
+#alias   ya,,    	'yamm'
+#alias   'cd ,,'    	'cd ..'
+
+################################################################
+# Various stuff
+alias   psl     	'cls ; ps -alef | grep $user | grep -v 'grep' | grep -v session | grep -v more | grep -v "\-tcsh" | grep -v "ps -alef" | grep -v tcsh | m'
+#alias   psl             "ps -alf | awk '"\{printf \"%10s %7s %7s %s %s %s %s\\n\", \$3,\$4,\$5,\$15,\$16,\$17,\$18\}"'"
+
+
+### misc.
+#alias quota 'quota -v'
+
+
+# time savers
+alias env_sarlab       'source /users/sarlab/.env_sarlab'
+
+
+alias ssarlab 'source /users/sarlab/.env_sarlab'
+

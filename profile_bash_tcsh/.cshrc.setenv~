@@ -1,0 +1,210 @@
+# ML, 13-Oct-2005, SEts environment variables.
+
+
+set ECHO=echo
+#$ECHO "File: .cshrc.setenv"
+
+
+# Set this in case of trouble logging in.
+# Sometimes the files sourced in teTeX are not there?
+#set FAILSAVE = 1
+
+# get always: aliases and environments
+# dfd common tools
+#if ( -x /home/dfdtools/environments/startup ) \
+#  source /home/dfdtools/environments/startup
+#------------
+# from /home/dfdtools/environments/startup
+set path = (/bin /sbin /usr/sbin /usr/bin /usr/etc /usr/local/bin /usr/ccs/bin /usr/ucb /home/dfdtools/exec .)
+
+setenv LM_LICENSE_FILE /home/dfdtools/licenses/license_combined
+setenv MANPATH "/usr/openwin/man"
+setenv DSM_DIR "/opt/IBMadsm-c/sol26"
+
+alias man       '/home/dfdtools/exec/man \!*'
+#------------
+
+
+# OpenWindows Environment
+if ( -x /home/dfdtools/environments/openwin ) \
+  source /home/dfdtools/environments/openwin
+
+# common aliases
+if ( -x /home/dfdtools/environments/aliases ) then
+  source /home/dfdtools/environments/aliases
+  unalias whoami # incorrect for linux
+endif
+
+
+## if ( $?ENV_SET == 0 ) then
+## DONT DO THSI HERE< IT SETS THE PATH THE HARD WAY
+#if ( -e $SOURCEFILE ) source $SOURCEFILE
+#set SOURCEFILE = "/home/dfdtools/environments/motif"   # Motif toolkit
+#if ( -e $SOURCEFILE ) source $SOURCEFILE
+#### required for matlab mbuild?
+#### required for compilers etc. 
+##set SOURCEFILE = "/home/dfdtools/environments/workshop_univ3.0"
+#set SOURCEFILE = "/home/dfdtools/environments/workshop_4.0.1"
+##set SOURCEFILE = "/home/dfdtools/environments/workshop_6.0"
+#if ( -e $SOURCEFILE ) source $SOURCEFILE
+##set SOURCEFILE = "/home/dfdtools/environments/www"     # WorldWideWeb
+##if ( -e $SOURCEFILE ) source $SOURCEFILE
+##set SOURCEFILE = "/home/dfdtools/environments/admin"   # admin goodies
+##if ( -e $SOURCEFILE ) source $SOURCEFILE
+#setenv ENV_SET
+## endif
+
+
+if ( $?MANPATH == 0 ) then
+  setenv MANPATH /home/se_vol02/isis_admin/insure/man
+else
+  setenv MANPATH /home/se_vol02/isis_admin/insure/man:$MANPATH
+endif
+#setenv MANPATH $MANPATH\:/home/dfdtools/lang/workshop/univ3.0/SUNWspro/man
+setenv MANPATH $MANPATH\:/home/dfdtools/lang/workshop/univ6.0/SUNWspro/man
+setenv MANPATH /usr/man\:$MANPATH
+setenv MANPATH /home/dfdtools/man\:$MANPATH
+
+# setenv VIMRUNTIME /users/lachaise/local/share/vim/vim72/
+# setenv VIM /users/lachaise/local/bin/vim
+setenv TERM xtermc
+
+
+# language
+setenv LC_ALL C
+
+#setenv LIBHOME /users/genesis/develop/library
+# MPI and other libraries:
+setenv PETSC_DIR   /users/fath_ah/LIBS/petsc-2.0.24/
+setenv PETSC_ARCH  solaris
+
+
+
+### MATLAB COMPILER
+#echo "preventing scott in library path... since problems..."
+#setenv LD_LIBRARY_PATH \
+#/home/scott01/gwtools/matlabr121/extern/lib/sol2\:$LD_LIBRARY_PATH
+#setenv LD_LIBRARY_PATH \
+#/home/scott01/gwtools/matlabr121/bin/sol2\:$LD_LIBRARY_PATH
+#setenv LD_LIBRARY_PATH \
+#.\:$LD_LIBRARY_PATH
+#setenv LD_LIBRARY_PATH \
+#bin\:$LD_LIBRARY_PATH
+
+
+
+# vtk (Visualization Tool Kit)
+#setenv LD_LIBRARY_PATH \
+#/opt/SUNWits/Graphics-sw/xgl/lib\:/users/fath_ah/LIBS/tcl8.1/lib\:/users/fath_ah/LIBS/tk8.1/lib\:$LD_LIBRARY_PATH
+
+#setenv TCL_LIBRARY \
+#  /users/fath_ah/LIBS/tcl8.1/library
+#setenv TK_LIBRARY \
+#  /users/fath_ah/LIBS/tk8.1/library
+setenv PRINTER irving_2_a4
+setenv LPDEST irving_2_a4
+
+#echo 'idl 6.0'
+#setenv RSI_DIR  /home/dfdtools/bv/idl/6.0
+#setenv IDL_DIR  /home/dfdtools/bv/idl/6.0/idl_6.0
+
+#setenv IDL_PATH $IDL_DIR/lib
+#echo $IDL_PATH
+#echo $?IDL_PATH
+#  if ( $?IDL_PATH ) then
+#    setenv IDL_PATH $IDL_PATH\:/users/fath_ah/IDL\:/users/fath_ah/SRC/INV_PROBLEM/IDL_LIB\:/users/fath_ah/SRC/QUICK_LOOK/VISU/qf
+#  else
+#    setenv IDL_PATH /users/fath_ah/IDL\:/users/fath_ah/SRC/INV_PROBLEM/IDL_LIB\:/users/fath_ah/SRC/QUICK_LOOK/VISU/qf
+#  endif
+#
+#setenv LD_LIBRARY_PATH \
+#  /home/dfdtools/bv/idl/6.2/idl/bin/bin.solaris2.sparc\:$LD_LIBRARY_PATH
+
+#setenv LD_LIBRARY_PATH $MOTIF_HOME/lib:$LD_LIBRARY_PATH
+
+# my idl part:
+#setenv MIDL_DIR        /users/fath_ah/IDL/MIDL
+#setenv MIDL_OS         SOLARIS
+
+#setenv MY_IDL_LIB      /users/fath_ah/IDL/NLIB
+#setenv MIDL_EXTERNAL   "$MIDL_DIR"/../EXTERN/"$MIDL_OS"/
+#setenv IDL_PATH        "$MIDL_EXTERNAL"/..:+"$MY_IDL_LIB":"$IDL_PATH"
+
+
+if ( "$system" != "itppnd2" && "$system" != "itppnd1" && "$system" != "itppnd3" && "$system" != "itppnd4") then
+  alias cd 'cd \!*;maries_prompt'
+  source /users/fath_ah/idl_setup.csh
+  alias idl               $IDL_DIR/bin/idl
+endif
+if ( "$system" == "itppnd2" || "$system" == "itppnd1" ||  "$system" == "itppnd3" || "$system" == "itppnd4") then
+  alias cd 'cd \!*;maries_prompt'
+  source /users/fath_ah/idl_setup.csh ; source /users/fath_ah/idl_setup_x86.csh ;
+  alias idl '/usr/local/itt/idl71/bin/idl'
+endif
+
+
+setenv CVSROOT /users/sarlab/cvs/
+
+alias xterm     "xterm -bg  black -fg white -vb -sl 65000"
+alias gv        "ghostview -bg white"
+
+
+## man pages with normal less
+setenv LESS "-sg"
+
+setenv GZIP -9
+#
+#setenv CC    "gcc"
+#setenv CC    "cc"
+#setenv CPP   "cc -E"
+#CC      =       $(CC_BIN) -I $(CPP_INCLUDE)
+#INST_PATH   = /home/dfdtools/public_domain/lang/gcc/2.8.1
+#CC_BIN      = $(INST_PATH)/bin/g++
+#CPP_INCLUDE = $(INST_PATH)/include/g++ \
+#	      -I$(INST_PATH)/sparc-sun-solaris2.5.1/include
+#
+###
+setenv XENVIRONMENT $HOME/.Xdefaults
+
+# do not set this...
+#setenv TMPDIR /tmp
+
+### Matlab ###
+#echo "preventing scott in library path... since problems..."
+#echo "preventing scott in library path... since problems..."
+#echo "preventing scott in library path... since problems..."
+#setenv MATLABPATH ${HOME}/MATLAB
+#setenv MATLABROOT /home/scott01/gwtools/matlabr121/
+#setenv MATLAB "/home/scott01/gwtools/matlabr121"
+
+# LD_LIBRARY_PATH
+setenv LD_LIBRARY_PATH  /usr/openwin/lib
+setenv LD_LIBRARY_PATH \
+  /opt/SUNWits/Graphics-sw/xgl/lib\:$LD_LIBRARY_PATH
+setenv LD_LIBRARY_PATH \
+  /home/nansen01/lib/\:$LD_LIBRARY_PATH
+
+setenv LD_LIBRARY_PATH \
+  /users/sarlab/tools/lib/sparcv9\:$LD_LIBRARY_PATH
+setenv LD_LIBRARY_PATH \
+  /usr/local/lib\:$LD_LIBRARY_PATH
+setenv LD_LIBRARY_PATH \
+  /lib\:$LD_LIBRARY_PATH
+### some progs of Nico, thus in front of /lib for e.g., libm.so.1
+setenv LD_LIBRARY_PATH \
+  /users/sarlab/tools/lib\:$LD_LIBRARY_PATH
+## Setting by Adam
+alias .. 'cd ..'
+alias ... 'cd ../..'
+alias ll 'ls -l'
+# Binding keys to get matlab-like history search
+bindkey -k up history-search-backward
+bindkey -k down history-search-forward
+
+
+#if ( $?SARP_SET == 0 ) then
+#echo "ICI "
+#  setenv SARP_SET
+#  exec newgrp eoc_file.modiy_sarp_b
+#endif
+

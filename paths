@@ -1,0 +1,2 @@
+/usr/share/hdf5_examples/c++/ #this folder contains C++ code for HD5, probably I can use it too
+/usr/local/itt/idl/idl80/products/envi48/data/ #this is the default OpenFile path for EnVI, there are sample files there

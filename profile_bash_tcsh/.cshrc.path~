@@ -1,0 +1,53 @@
+# file to set path, set explicit to avoid it getting longer.
+# 2b sourced in .cshrc 
+# bk 07-Feb-2000
+
+
+#echo "File: .cshrc.path"
+### set this in case of trouble logging in
+set FAILSAFE = 0  # no failsafe
+#set FAILSAFE = 1  # little bit failsafe
+#set FAILSAFE = 2  # don't do a thing
+
+### Default path
+### only first time copy the system wide path
+if ( $?SYSTEM_PATH == 0 ) then
+  setenv SYSTEM_PATH "`echo $path | sed 's/ /:/g'`"
+endif
+### copied from /home/dfdtools/environments/startup
+set path = (/bin /sbin /usr/sbin /usr/bin /usr/etc /usr/local/bin /usr/ccs/bin /usr/ucb /home/dfdtools/exec)
+
+
+
+if ( $FAILSAFE < 2 ) then
+#	   /home/dfdtools/lang/workshop/univ3.0/SUNWspro/bin \
+
+### note the increasing order of importance.
+set path = ( /users/sarlab/develop/src/processors/esar_traffic/bin/ $path )
+set path = ( /home/dfdtools/lang/workshop/6.0/SUNWspro/bin $path )
+set path = ( /home/dfdtools/public_domain/lang/gcc/2.95.1/2.7/bin $path )
+#set path = ( /home/dfdtools/public_domain/lang/gcc/3.3.1/bin $path )
+set path = ( /home/dfdtools/exec $path )
+set path = ( /usr/sbin $path )
+set path = ( /usr/ucb $path )
+set path = ( /usr/ccs/bin $path )
+set path = ( /usr/local/bin $path )
+set path = ( /usr/etc $path )
+set path = ( /usr/bin $path )
+set path = ( /usr/openwin/bin $path )
+set path = ( /opt/sfw/bin $path )
+set path = ( /sbin $path )
+set path = ( /bin $path )
+#echo "PREVENTING SCOTT PATH"
+#set path = ( /home/scott01/gwtools/matlabr121/bin $path )
+
+set path = ( /users/fath_ah/bin $path )
+set path = ( /users/fath_ah/local/bin $path )
+set path = ( /users/fath_ah/TanDEMX/MB_PU/bin $path )
+set path = ( . $path )
+endif
+
+
+#echo "EOF: .cshrc.path"
+
+### EOF

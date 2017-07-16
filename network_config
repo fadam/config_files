@@ -1,0 +1,13 @@
+[root@netzer:kerr_gr]# more /etc/sysconfig/network-scripts/ifcfg-enp0s25
+#DEVICE="eth0"
+BOOTPROTO="static"
+BROADCAST="129.247.184.255"
+DNS1="129.247.160.1"
+DNS2="172.21.154.193"
+GATEWAY="129.247.184.254"
+IPADDR="129.247.184.48"
+NETMASK="255.255.255.0"
+NM_CONTROLLED="yes"
+ONBOOT="yes"
+TYPE="Ethernet"
+DOMAIN="intra.dlr.de af.op.dlr.de c-af.dlr.de"

@@ -1,0 +1,129 @@
+# This is the resource file for tcsh.
+# It is made generic by using $user and $HOME
+# You are welcome to copy it to your home directory
+# and edit it to your liking.
+# Also see the files (in my home directory): 
+# cshrc.alias cshrc.path .tcshrc.complete .tcshrc .cshrc
+#
+#%// ML 13-Oct-2005
+######################################
+
+### Everything below this line is only for interactive shells
+if ( ! ${?prompt} ) exit
+
+
+### Check interactive shell
+set prompt=" %B%{[34m%}[%m] %{[32m%}[%~] "
+set VERBOSE = "1"
+if ( ! ${?prompt} ) set VERBOSE = "0"
+if ( ! ${?HOME} )   set HOME    = "/users/fath_ah"
+set ECHO = "# "
+if ( $VERBOSE )     set ECHO = "echo "
+#$ECHO "File: .tcshrc"
+echo "Shell is tcsh"
+
+
+
+#-----------------------------
+#$ECHO "Setting tcsh variables"
+#-----------------------------
+unset autologout
+unset noclobber
+set nohup		# no hang up at logout
+#set noclobber		# don't overwrite existing file w/ redirect
+set rmstar		# prompt before executing rm *
+set history=2000000	        # previous commands to remember.
+#set savehist=3000000	# number to save across sessions.
+set savehist=( $history merge )
+set histfile = $HOME/.tcsh_history
+#set autocorrect=1
+unset autocorrect
+set histdup=erase
+set autolist=ambiguous  # display possible completions
+set listmaxrows=40      # max rows...
+set nobeep              # do not beep if completions exist
+set symlinks=ignore     # treat symlinks as real
+#set symlinks=expand    # ?
+#  set pushdtohome      # pushd w/o arguments defaults to $HOME
+set nobeep
+set notify		# immediate notification when jobs finish
+set ignoreeof		# disable ctrl-d from logging out
+#cdpath and fignore are time-savers, but can be confusing to novices
+#search path for the cd command:
+set cdpath=(. .. $HOME /home/tvsp19/zhu_xi/TD_X_NL_INSAR/)
+# suffixes to ignore for file completion: (very convenient)
+# I have the habbit of making backups as oldname.21-Apr-2001 etc,
+# so ignore these.
+set fignore=(.o .a .pdf .PDF .eps .epsi .deps .depsi .dps .psc .epsc .ps .aux .dvi .log .toc .lof .lot .bbl .blg .bak)
+limit coredumpsize 1	# don't write core dumps, for xdb debugger need for core
+umask 022		# 022 is no write but read for others
+
+
+#---------------------------------------#
+# Shell-Dependent Variables and Aliases #
+#---------------------------------------#
+# tcsh is a near superset of csh.  Since this file is read by
+# both shells, we only set those items particular to tcsh if
+# tcsh is running.  Similarly, we handle csh-only settings here.
+
+### Check system variables
+if ( ! $?system ) then
+  if ( $?HOST ) then
+    set system = $HOST
+  else
+    #if ( `which uname | cut -f3 -d" "` == "not" ) then
+    which uname >& /dev/null
+    if ( $status == 0 ) then # uname exists
+      set system = `uname -n`
+    else
+      set system = "No-name" #default
+    endif
+  endif
+endif
+#$ECHO "Setting system to $system"
+
+
+# Finishing touch
+## Stuff set by Adam
+alias .. 'cd ..'
+alias ... 'cd ../..'
+alias ll 'ls -l'
+alias lts 'ls -lrth'
+alias lee 'cd ~/Dropbox/lee'
+alias goldi 'cd ~/Dropbox/goldstein'
+alias yilei 'cd ~/Dropbox/yilei'
+alias gdb 'gdb -q'
+alias clean 'rm *.[od]'
+alias nls  'cd ~/nlinsar'
+alias rmd '/bin/rm -rf'
+alias trash 'mv -t  ~/.local/share/Trash/files'
+alias ping 'ping -c 4'
+alias matlab 'matlab &'
+# Binding keys to get matlab-like history search
+bindkey -k up history-search-backward
+bindkey -k down history-search-forward
+
+set SOURCEFILES = " $HOME/.cshrc.path $HOME/.cshrc.alias"# $HOME/idl_scripts/idl_setup_dlr.csh"
+foreach SOURCEFILE ( $SOURCEFILES )
+  $ECHO "START sourcing:    $SOURCEFILE"
+  if ( -e $SOURCEFILE ) then
+    source $SOURCEFILE
+    #$ECHO "FINISHED sourcing: $SOURCEFILE"
+  else
+    $ECHO "NOT SOURCING FILE: $SOURCEFILE"
+  endif
+end
+##
+set myuser = "$user"
+if ( "$user" == "fath_ah"   )  set myuser = "Adam"
+endif
+
+# additional stuff by Adam
+set dump = $HOME/dump
+set data = /home/tvsp19/zhu_xi/TD_X_NL_INSAR/
+#xmodmap .Xmodmap
+
+
+### EOF.
+set prompt="%B%{[33m%}[%m] %{[32m%}[%~] "
+bash

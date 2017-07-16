@@ -1,0 +1,78 @@
+HISTSIZE=10000000
+HISTFILESIZE=20000000
+set -o vi
+if [ $HOST == "eoc-sv-avtools" ]
+then
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+fi
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias ..='cd ..'
+alias lts='ls -lrth'
+alias clean='/bin/rm *.[od]'
+alias ping='ping -c 4'
+alias nls='cd ~/nlinsar'
+alias rmd='/bin/rm -rf'
+alias trash='mv -t ~/.local/share/Trash/files/'
+alias ...='cd ../..'
+alias   count='ls -1"$@"| wc -l'
+alias matlab='matlab&'
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-backward'
+# set variables fro the envi.
+export dump=$HOME/dump
+export data=/home/tvsp19/zhu_xi/TD_X_NL_INSAR/
+export CVSROOT=/users/fath_ah/cvsroot
+export SHELL=/bin/bash
+
+#  Rlogin aliases
+alias	itp='ssh -X itppnd1'
+alias	itp2='ssh -X itppnd2'
+alias	itp3='ssh -X itppnd3'
+alias	itp4='ssh -X itppnd4'
+alias tvsp1='ssh -X tvsp1'
+alias tvsp2='ssh -X tvsp2'
+alias capone='ssh -X capone'
+alias t7500='ssh  eoc-sv-t7500'
+alias psipn1='ssh  psipn1'
+#alias tvsp1 'remsh tvsp1 -l fath_ah'
+
+# set prompt="%B%{[31m%}[%m] %{[34m%}[%~] "
+export PS1="\e[1;33m [\h] \e[m\e[1;32m[\w]\e[m "
+
+SYSTEM=`uname -n`
+ if [ $SYSTEM == "itppnd1" ] 
+	then
+export  PATH="/users/fath_ah/openmpi-install_itppnd1/bin:$PATH"
+export  LD_LIBRARY_PATH='/users/fath_ah/openmpi-install_itppnd1/lib'
+# echo "I am on itppnd2, setting the env for it"
+ fi
+
+ if [ $SYSTEM == "itppnd2" ] 
+	then
+export  PATH="/users/fath_ah/openmpi-install-itppnd2/bin:$PATH"
+export  LD_LIBRARY_PATH='/users/fath_ah/openmpi-install-itppnd2/lib'
+# echo "I am on itppnd2, setting the env for it"
+ fi
+
+ if [ $SYSTEM == "itppnd3" ] 
+	then
+export  PATH="/users/fath_ah/openmpi-install-itppnd3/bin:$PATH"
+export  LD_LIBRARY_PATH='/users/fath_ah/openmpi-install-itppnd3/lib'
+ fi
+
+ if [ $SYSTEM == "eoc-sv-t7500" ] 
+	then
+export  PATH="/users/fath_ah/openmpi-install_t7500/bin:$PATH"
+export  LD_LIBRARY_PATH='/users/fath_ah/openmpi-install_t7500/lib'
+# echo "I am on itppnd2, setting the env for it"
+ fi
+#else if $SYSTEM == "eoc-sv-t7500" then
+# set path = ( /users/fath_ah/openmpi-install_t7500/bin $path )
+# setenv LD_LIBRARY_PATH  '/users/fath_ah/openmpi-install_t7500/lib'
+ #echo "I am on t7500, setting the env for it"
+
+ echo "Shell is bash"
+

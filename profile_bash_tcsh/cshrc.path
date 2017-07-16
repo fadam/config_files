@@ -1,0 +1,60 @@
+# file to set path, set explicit to avoid it getting longer.
+# 2b sourced in .cshrc 
+# bk 07-Feb-2000
+
+
+#echo "File: .cshrc.path"
+### set this in case of trouble logging in
+set FAILSAFE = 0  # no failsafe
+
+### Default path
+### only first time copy the system wide path
+if ( $?SYSTEM_PATH == 0 ) then
+  setenv SYSTEM_PATH "`echo $path | sed 's/ /:/g'`"
+endif
+### copied from /home/dfdtools/environments/startup
+set path = (/bin /sbin /usr/sbin /usr/bin /usr/etc /usr/local/bin /usr/ccs/bin /usr/ucb /home/dfdtools/exec )
+
+
+
+if ( $FAILSAFE < 2 ) then
+### note the increasing order of importance.
+set path = ( /home/dfdtools/public_domain/lang/gcc/3.3.1/bin $path )
+set path = ( /usr/openwin/bin $path )
+set path = ( /opt/sfw/bin $path )
+set path = ( /users/fath_ah/bin $path )
+set path = ( . $path )
+endif
+
+### EOF
+set path = ( /usr/local/itt/idl/bin $path )
+set path = ( /users/sarlab/tools/solaris_x86/bin $path )
+set path = ( /users/sarlab/develop/processors/TMSP/installations/V4.300.solaris_x86/scripts $path )
+set path = ( /users/sarlab/develop/processors/TMSP/installations/V4.300.solaris_x86/bin $path )
+set path = ( /users/sarlab/develop/processors/TMSP/installations/V4.300.solaris_x86/bin_w42 $path )
+set path = ( /usr/sfw/bin $path )
+set path = ( /home/dfdtools/exec/rational_7.0.0.0-012/releases/purecov.sol.7.0.0.0-012 $path )
+set path = ( /home/dfdtools/exec/rational_7.0.0.0-012/releases/quantify.sol.7.0.0.0-012 $path )
+set path = ( /home/dfdtools/exec/rational_7.0.0.0-012/releases/purify.sol.7.0.0.0-012 $path )
+set path = ( /users/sarlab/tools/solaris_x86/bin $path )
+set path = ( /home/dfdtools/wrapper/SunOS_X86/Sun-Studio-12/bin $path )
+set path = ( /usr/bin $path )
+set path = ( /etc $path )
+set path = ( /users/fath_ah/bin $path )
+set SYSTEM = `uname -n`
+if $SYSTEM == "itppnd1" then
+set path = ( /users/fath_ah/openmpi-install_itppnd1/bin $path )
+setenv LD_LIBRARY_PATH  '/users/fath_ah/openmpi-install_itppnd1/lib'
+	else if $SYSTEM == "itppnd2" then
+set path = ( /users/fath_ah/openmpi-install-itppnd2/bin $path )
+setenv LD_LIBRARY_PATH  '/users/fath_ah/openmpi-install-itppnd2/lib'
+	else if $SYSTEM == "itppnd3" then
+set path = ( /users/fath_ah/openmpi-install-itppnd3/bin $path )
+setenv LD_LIBRARY_PATH  '/users/fath_ah/openmpi-install-itppnd3/lib'
+#echo "I am on itppnd1, setting the env for it"
+	else if $SYSTEM == "eoc-sv-t7500" then
+set path = ( /users/fath_ah/openmpi-install_t7500/bin $path )
+setenv LD_LIBRARY_PATH  '/users/fath_ah/openmpi-install_t7500/lib'
+#echo "I am on t7500, setting the env for it"
+endif
+endif

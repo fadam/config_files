@@ -1,0 +1,37 @@
+# ML, 13-Oct-2005, SEts environment variables.
+
+set ECHO=echo
+#$ECHO "File: .cshrc.setenv"
+
+
+
+setenv LM_LICENSE_FILE /home/dfdtools/licenses/license_combined
+setenv DSM_DIR "/opt/IBMadsm-c/sol26"
+
+
+if ( $?MANPATH == 0 ) then
+  setenv MANPATH /home/se_vol02/isis_admin/insure/man
+else
+  setenv MANPATH /home/se_vol02/isis_admin/insure/man:$MANPATH
+endif
+setenv MANPATH $MANPATH\:/home/dfdtools/lang/workshop/univ6.0/SUNWspro/man
+setenv MANPATH /usr/man\:$MANPATH
+setenv MANPATH /home/dfdtools/man\:$MANPATH
+
+
+## Setting by Adam
+alias .. 'cd ..'
+alias ... 'cd ../..'
+alias ll 'ls -l'
+# Binding keys to get matlab-like history search
+bindkey -k up history-search-backward
+bindkey -k down history-search-forward
+setenv CVSROOT '/users/fath_ah/cvsroot'
+
+
+#if ( $?SARP_SET == 0 ) then
+#echo "ICI "
+#  setenv SARP_SET
+#  exec newgrp eoc_file.modiy_sarp_b
+#endif
+

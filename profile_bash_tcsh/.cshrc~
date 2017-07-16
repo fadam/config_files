@@ -1,0 +1,101 @@
+# file: .cshrc
+# skip remaining setup if not an interactive shell
+if ( $?USER == 0 || $?prompt == 0 ) exit
+
+##########################################################
+set VERBOSE = "1"
+set ECHO = "# "
+if ( $VERBOSE ) set ECHO = "echo "
+$ECHO "File: .cshrc"
+
+### Check system variables
+if ( $?system == 0 ) then
+#  $ECHO "system not set"
+  if ( $?HOST != 0 ) then
+#    $ECHO "using HOST"
+    set system = $HOST
+  else
+    # assume uname is there, which takes a long time, or not in cshrc?
+    set system = `/bin/uname -n`
+#    $ECHO "system set to $system"
+    #if ( `which uname | cut -f3 -d" "` == "not" ) then
+    #which uname >& /dev/null
+    #which uname >& /dev/null
+    #if ( $status == 0 ) then # uname exists
+    #  set system = `uname -n`
+    #else
+    #  set system = "franklin" #default
+    #endif
+  endif
+endif
+
+
+# Settings  for interactive shells
+set savehist=30
+set history=30
+set filec=enable
+#umask 022   # file permission = rw- r-- r--
+#            # dir  permission = rwx r-x r-x
+#umask 2     # file permission = rw- rw- r--
+#            # dir  permission = rwx rwx r-x
+
+
+
+###################################################################
+#    von Nico
+###################################################################
+# frame maker and PDF distiller
+#source /users/dfdtools/environments/frame
+
+
+### set this environment variable to prevent tcsh
+#setenv NO_TCSH 1
+#if ( ${?NO_TCSH} == 0 ) then
+# check if we are already in a tcsh, open it
+#if ( "X$tcsh" == "X" ) then
+#if ( ! -d ~/2_TVSP02 ) then
+#  rm -f ~/2_TVSP02
+#  $ECHO "link 2_TVSP02 does not exist"
+#  if ( -d /SANexport/tvsp02/fath_ah ) then
+#    ln -s /SANexport/tvsp02/fath_ah ~/2_TVSP02
+#  else if ( -d /home/tvsp02/fath_ah ) then
+#    ln -s /home/tvsp02/fath_ah ~/2_TVSP02
+#  else
+#    $ECHO "cannot link 2_TVSP02"
+#  endif
+#else
+#  $ECHO "link 2_TVSP02 exists already"
+#endif
+
+$ECHO $?GROUP
+#if ( $?GROUP == 0) then
+#   newgrp SARP
+#   source ~sarlab/.env_sarlab
+#endif
+
+if ( ${?tcsh} == 0 ) then
+  $ECHO "starting a tcsh..."
+  ### Source other files via .tcshrc
+  set SOURCEFILE  = "$HOME/bin/tcsh"
+  set SOURCEFILE2 = "/home/dfdtools/exec/tcsh"
+  if ( -e $SOURCEFILE ) then
+    $ECHO "Starting: $SOURCEFILE"
+    $SOURCEFILE
+  else if ( -e $SOURCEFILE2 ) then
+      $ECHO "NOT FOUND: $SOURCEFILE"
+      $ECHO "Starting: $SOURCEFILE2"
+      $SOURCEFILE2
+  else
+    $ECHO "NOT FOUND: $SOURCEFILE"
+    $ECHO "NOT FOUND: $SOURCEFILE2"
+  endif
+  if ( ${?tcsh} == 0 ) set tcsh = dummy
+else
+  #$ECHO "NOT USING TCSH SINCE ENV VAR NOTCHS SET"
+  $ECHO "we are in a tcsh..."
+  if ( -e $HOME/.cshrc.path )   source $HOME/.tcshrc
+  #if ( -e $HOME/.cshrc.path )   source $HOME/.cshrc.path
+  #if ( -e $HOME/.cshrc.setenv ) source $HOME/.cshrc.setenv
+  #if ( -e $HOME/.cshrc.alias )  source $HOME/.cshrc.alias
+endif
+

@@ -1,0 +1,25 @@
+HISTSIZE=10000000
+HISTFILESIZE=20000000
+CDPATH=~:~/thinWork
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias ..='cd ..'
+alias lts='ls -lrth'
+alias clean='/bin/rm *.[od]'
+alias ping='ping -c 4'
+alias nls='cd ~/nlinsar'
+alias rmd='/bin/rm -rf'
+alias trash='mv -t ~/.local/share/Trash/files/'
+alias ...='cd ../..'
+alias   count='ls -1"$@"| wc -l'
+#xmodmap .Xmodmap
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-backward'
+# set variables fro the envi.
+export SHELL=/bin/bash
+
+# set prompt="%B%{[31m%}[%m] %{[34m%}[%~] "
+export PS1="\e[1;35m [\h] \e[m\e[1;32m[\w]\e[m "

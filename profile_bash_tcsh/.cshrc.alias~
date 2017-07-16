@@ -1,0 +1,114 @@
+#echo "File: .cshrc.alias"
+
+if ( "$system" != "itppnd2" && "$system" != "itppnd1" &&  "$system" != "itppnd3" && "$system" != "itppnd4") then
+   alias   ls      	'ls --color=tty'
+   alias   ll      	'ls -l --color=tty'
+   alias   la      	'ls -a --color=tty'
+endif
+
+alias print	        'mp -l -s "\!*" <\!* | lp -dirving'
+alias	xv		'/home/dfdtools/exec/xv_3.10a -visual 0x28'
+#if ( -x /users/genesis/develop/bin/gxv ) alias xv 'gxv'
+
+alias bigfiles          'find . -ls -type f | sort -n +6 | tail -20'
+alias idl6              "source /home/dfdtools/bv/idl/6.0/idl_6.0/bin/idl_setup"
+alias idlde             $IDL_DIR/bin/idlde
+#alias idl_who_uses       "/home/dfdtools/bv/idl/5.4/idl_5.4/bin/lmstat -a | m"
+#alias idl_who_uses "/home/dfdtools/bv/idl/5.4/idl_5.4/bin/lmstat -f idl | grep -v RESERVATION | grep -v queued | awk '{if ( NR > 8 ) {print "'$1,$8,$9,$10}}'"' | sort | uniq -c | sort -r"
+
+
+################################################################
+if ( ! $?EDITOR ) then
+  setenv EDITOR "vi"
+endif
+
+
+################################################################
+# Plain old unix + default flags
+alias   m       	'more'
+alias   a       	'alias | m'
+alias   d       	'/bin/ls -al \!* | m'
+alias   h       	'history | m'
+alias   t       	'date +"  DATE: %d.%m.%Y    (%A)%n  TIME: %H:%M:%S"'
+alias   w       	'w \!* | sort | m'
+alias   bc      	'bc -l'
+alias   gv      	'ghostview -bg white -fg black -a4 \!*&'
+alias   ac      	'/home/dfdtools/public_domain/conv/acrobat/8.1.1/bin/acroread \!* &'
+alias   ll     	        'ls -al \!* | m'
+alias   who     	'who -TH \!* | sort'
+
+### Prompts
+#alias   smallprompt     'set prompt="$user\@$system\: "'
+#alias   smallprompt2    'set prompt="%B%m%b %C2%# "'
+#alias   smallprompt3    'set prompt="%C2%# "'
+alias   bigprompt       'set prompt="%m:%~%# "'
+
+################################################################
+# Utilities
+alias   path     	'set | grep path'
+alias   manpath     	'echo $MANPATH'
+
+################################################################################
+################################################################
+#  Rlogin aliases
+alias	itpd1		'ssh -X itppnd1'
+alias	itpd2		'ssh -X itppnd2'
+
+################################################################
+# Typo helpers
+alias   s      		'ls'	# ik type vaak per ongeluk ;s ipv ls
+alias   pw      	'pwd'
+alias   pd      	'pwd'
+#alias   geso1    	'geos1'
+#alias   detex    	'untex'
+alias   mdkir    	'mkdir'
+#alias   exir    	'exit'
+alias   cd..    	'cd ..'
+#alias   ya,,    	'yamm'
+#alias   'cd ,,'    	'cd ..'
+
+
+
+################################################################
+# Various stuff
+alias   psl     	'cls ; ps -alef | grep $user | grep -v 'grep' | grep -v session | grep -v more | grep -v "\-tcsh" | grep -v "ps -alef" | grep -v tcsh | m'
+#alias   psl             "ps -alf | awk '"\{printf \"%10s %7s %7s %s %s %s %s\\n\", \$3,\$4,\$5,\$15,\$16,\$17,\$18\}"'"
+
+
+### misc.
+#alias quota 'quota -v'
+
+### CVS SARLAB
+#alias cvs_status 'cvs status | grep Status | grep -v "Up-to-date"'
+#alias cvs_log 'cvs log \!* | grep -v revision | grep -v "date:"'
+#alias cvs_log 'cvs log \!* |tail +10 | grep -v revision | grep -v "date:"|more'
+#alias commit 'cvs commit -m'
+#alias develop 'setenv WORKING_ENVIRONMENT develop;source /users/sarlab/tools/scripts/env_working;cd $DEVELOP'
+#alias integration 'setenv WORKING_ENVIRONMENT integration;source /users/sarlab/tools/scripts/env_working;cd $INTEGRATION'
+#alias convert '/home/nansen01/bin/convert'
+#alias html2ps '/home/nansen01/bin/html2ps'
+#alias wget '/home/nansen01/bin/wget'
+
+###
+#alias dvips    'dvips -Ppdf -G0'
+
+# time savers
+alias env_sarlab       'source /users/sarlab/.env_sarlab'
+
+
+alias SARP  'newgrp eoc_file.modify_sarp_b'
+
+#alias stvsp1 'ssh tvsp1'
+#alias tvsp1 'remsh tvsp1 -l fath_ah'
+alias itp1 'ssh -X itppnd1'
+alias ssarlab 'source /users/sarlab/.env_sarlab'
+alias go2TDX 'cd /SANexport/tvsp04/marie/TanDEMX'
+alias go2simu 'cd /SANexport/tvsp04/marie/simulation/Gars'
+
+
+alias make7 'make VARIANT=default CC_NAME=CC5.7_64bit'
+alias smake7 'make VARIANT=debug CC_NAME=CC5.7_64bit'
+
+##### alias for TDX INSAR
+#alias set_tsx 'set pwd = $PWD; source /users/sarlab/.cshrc; source /users/sarlab/.env_sarlab; cd $pwd; set path = (/users/sarlab/develop/src/processors/genesis/install/processor_solaris64 $path)'
+#alias set_tsx_ps 'setenv PS_BIN_DIR /users/sarlab/develop/src/processors/permanent_scatterer/install/tsx_processor_solaris64'
